@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\MouseCoordinates.Application\MouseCoordinates.Application.csproj" />
+    <ProjectReference Include="..\MouseCoordinates.Persistence\MouseCoordinates.Persistence.csproj" />
+  </ItemGroup>
+
+</Project>

@@ -17,9 +17,7 @@ namespace MouseCoordinates.Application.Coords.Commands.AddCoordinates
             var coordinates = new Coordinates
             {
                 Id = Guid.NewGuid(),
-                X = request.X,
-                Y = request.Y,
-                CreationDate = DateTime.Now
+                Coords = request.Coords
             };
 
             await _dbContext.Coords.AddAsync(coordinates, cancellationToken);

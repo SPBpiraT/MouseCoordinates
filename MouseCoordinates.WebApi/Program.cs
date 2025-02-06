@@ -35,4 +35,12 @@ using (var scope = app.Services.CreateScope())
 
 app.MapGet("/", () => "Hello World!");
 
+app.UseRouting();
+app.UseHttpsRedirection();
+
+app.UseEndpoints(endpoints =>
+{
+    endpoints.MapControllers();
+});
+
 app.Run();

@@ -1,6 +1,22 @@
+using MouseCoordinates.Application.Common.Mapping;
+using MouseCoordinates.Application.Interfaces;
 using MouseCoordinates.Persistence;
+using MouseCoordinates.Application;
+using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
+
+IConfiguration config = builder.Configuration;
+
+builder.Services.AddAutoMapper(config =>
+{
+    config.AddProfile(new AssemblyMappingProfile(Assembly.GetExecutingAssembly()));
+    config.AddProfile(new AssemblyMappingProfile(typeof(ICoordinatesDbContext).Assembly));
+});
+
+builder.Services.AddApplication();
+builder.Services.AddPersistence(config);
+
 var app = builder.Build();
 
 using (var scope = app.Services.CreateScope())

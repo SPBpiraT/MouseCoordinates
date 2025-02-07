@@ -1,6 +1,7 @@
 ﻿using MediatR;
 using MouseCoordinates.Application.Interfaces;
 using MouseCoordinates.Domain;
+using Newtonsoft.Json;
 
 namespace MouseCoordinates.Application.Coords.Commands.AddCoordinates
 {
@@ -17,7 +18,7 @@ namespace MouseCoordinates.Application.Coords.Commands.AddCoordinates
             var coordinates = new Coordinates
             {
                 Id = Guid.NewGuid(),
-                Coords = request.Coords
+                CoordsJson = JsonConvert.SerializeObject(request.Coords)
             };
 
             await _dbContext.Coords.AddAsync(coordinates, cancellationToken);

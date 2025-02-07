@@ -17,6 +17,11 @@ namespace MouseCoordinates.WebApi.Controllers
         [HttpPost]
         public async Task<ActionResult<Guid>> Add([FromBody] AddCoordinatesDto coordDto)
         {
+            if (coordDto == null || coordDto.Coords == null)
+            {
+                return BadRequest("Invalid data.");
+            }
+
             var command = _mapper.Map<AddCoordinatesCommand>(coordDto);
             var messageId = await Mediator.Send(command);
             return Ok(messageId);

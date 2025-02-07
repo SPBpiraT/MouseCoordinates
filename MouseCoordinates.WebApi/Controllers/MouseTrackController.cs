@@ -15,9 +15,9 @@ namespace MouseCoordinates.WebApi.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<Guid>> Add([FromBody] AddCoordinatesDto createMessageDto)
+        public async Task<ActionResult<Guid>> Add([FromBody] AddCoordinatesDto coordDto)
         {
-            var command = _mapper.Map<AddCoordinatesCommand>(createMessageDto);
+            var command = _mapper.Map<AddCoordinatesCommand>(coordDto);
             var messageId = await Mediator.Send(command);
             return Ok(messageId);
         }

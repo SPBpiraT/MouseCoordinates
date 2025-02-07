@@ -1,0 +1,20 @@
+﻿body {
+    background-color: lightblue;
+}
+
+.button-container {
+    display: grid;
+    place-items: center; 
+    height: 100vh;
+}
+
+.button {
+    font-size: 16px;
+    background-color: #a3f5dc;
+    border-radius: 4px;
+    color: #000000;
+    font-family: Arial;
+    width: 30%;
+    padding: 10px;
+    text-align: center;
+}

@@ -4,12 +4,18 @@
 
     document.addEventListener('mousemove', (event) => {
         const date = new Date();
-        const formattedTime = date.toLocaleString();
-        mouseCoordinates.push([event.clientX, event.clientY, formattedTime]);
+        const formattedTime = date.toLocaleTimeString();
+
+        mouseCoordinates.push({
+            X: event.clientX,
+            Y: event.clientY,
+            DateTime: formattedTime
+        });
     });
 
     button.addEventListener('click', () => {
-        const data = JSON.stringify(mouseCoordinates);
+        const data = JSON.stringify({ Coords: mouseCoordinates });
+
         fetch('/api/MouseTrack/Add', {
             method: 'POST',
             headers: {
@@ -17,7 +23,12 @@
             },
             body: data
         })
-            .then(response => response.json())
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`HTTP error status: ${response.status}`);
+                }
+                return response.json();
+            })
             .then(data => {
                 console.log('Data sent successfully:', data);
             })

@@ -11,4 +11,10 @@
     <ProjectReference Include="..\MouseCoordinates.Persistence\MouseCoordinates.Persistence.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="Styles\app.css">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>

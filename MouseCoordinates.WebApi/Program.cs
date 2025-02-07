@@ -3,6 +3,7 @@ using MouseCoordinates.Application.Interfaces;
 using MouseCoordinates.Persistence;
 using MouseCoordinates.Application;
 using System.Reflection;
+using Microsoft.Extensions.FileProviders;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -17,6 +18,7 @@ builder.Services.AddAutoMapper(config =>
 builder.Services.AddApplication();
 builder.Services.AddPersistence(config);
 builder.Services.AddControllers();
+builder.Services.AddRazorPages();
 
 var app = builder.Build();
 
@@ -33,8 +35,14 @@ using (var scope = app.Services.CreateScope())
         //TODO: Add logging
     }
 }
+app.UseStaticFiles();
 
-app.MapGet("/", () => "Hello World!");
+app.UseStaticFiles(new StaticFileOptions
+{
+    FileProvider = new PhysicalFileProvider(
+        Path.Combine(app.Environment.ContentRootPath, "Styles")),
+    RequestPath = "/styles"
+});
 
 app.UseRouting();
 app.UseHttpsRedirection();
@@ -42,6 +50,7 @@ app.UseHttpsRedirection();
 app.UseEndpoints(endpoints =>
 {
     endpoints.MapControllers();
+    endpoints.MapRazorPages();
 });
 
 app.Run();

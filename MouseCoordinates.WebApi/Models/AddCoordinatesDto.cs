@@ -6,7 +6,7 @@ namespace MouseCoordinates.WebApi.Models
 {
     public class AddCoordinatesDto : IMapWith<AddCoordinatesCommand>
     {
-        public string Coords { get; set; }
+        public List<CoordinateData> Coords { get; set; }
 
         public void Mapping(Profile profile)
         {
